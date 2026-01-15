@@ -1,0 +1,83 @@
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Star, Shield, Zap, Camera } from "lucide-react";
+
+export default function Home() {
+  return (
+    <div className="relative min-h-screen bg-black text-white overflow-hidden">
+      {/* Background particles */}
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05),transparent_70%)]" />
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="max-w-5xl mx-auto px-6 py-24"
+      >
+        {/* Hero */}
+        <h1 className="text-4xl md:text-6xl font-bold text-center tracking-tight">
+          STANDOFF 2 <span className="text-zinc-400">| PROFESSIONAL BOOST</span>
+        </h1>
+        <p className="mt-6 text-xl text-center text-zinc-300">
+          Хочешь звание легенды? Мы поможем.
+        </p>
+
+        {/* Problems */}
+        <div className="mt-14 text-center space-y-3 text-zinc-400">
+          <p>Застрял на одном ранге?</p>
+          <p>Сливают рандомные тиммейты?</p>
+          <p className="text-white font-semibold">Пора это исправить.</p>
+        </div>
+
+        {/* Bonuses */}
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-4 gap-6">
+          <Bonus icon={<Zap />} title="STATS" desc="Высокий KD и сильная статистика" />
+          <Bonus icon={<Camera />} title="REPORTS" desc="Фото и видео отчёты" />
+          <Bonus icon={<Shield />} title="SAFETY" desc="100% безопасность, без софта" />
+          <Bonus icon={<Star />} title="NON-STOP" desc="Работаем 24/7" />
+        </div>
+
+        {/* Price */}
+        <div className="mt-16 text-center">
+          <p className="text-2xl font-semibold">Цена: <span className="text-zinc-400">Договорная</span></p>
+          <p className="text-zinc-500 mt-2">Найдём подход к каждому клиенту</p>
+        </div>
+
+        {/* Actions */}
+        <div className="mt-14 flex flex-col md:flex-row justify-center gap-4">
+          <Button
+            asChild
+            className="bg-white text-black hover:bg-zinc-200 px-8 py-6 text-lg"
+          >
+            <a href="https://t.me/yourtelegram" target="_blank">Заказать буст</a>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            className="border-zinc-700 text-white hover:bg-zinc-900 px-8 py-6 text-lg"
+          >
+            <a href="https://t.me/yourtelegramreviews" target="_blank">Отзывы в Telegram</a>
+          </Button>
+        </div>
+
+        {/* Footer CTA */}
+        <p className="mt-20 text-center text-zinc-400 text-lg">
+          Залетай в топ прямо сейчас.
+        </p>
+      </motion.div>
+    </div>
+  );
+}
+
+function Bonus({ icon, title, desc }) {
+  return (
+    <Card className="bg-zinc-950 border-zinc-800">
+      <CardContent className="p-6 text-center">
+        <div className="flex justify-center mb-4 text-zinc-300">{icon}</div>
+        <h3 className="font-semibold text-lg">{title}</h3>
+        <p className="text-sm text-zinc-500 mt-2">{desc}</p>
+      </CardContent>
+    </Card>
+  );
+}
