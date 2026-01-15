@@ -2,10 +2,9 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>STANDOFF 2 | PROFESSIONAL BOOST</title>
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
@@ -22,75 +21,83 @@
       overflow-x: hidden;
     }
 
-    /* Background glow */
-    .bg-glow {
+    canvas {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+    }
+
+    .glow {
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(circle at top, rgba(120,120,255,0.18), transparent 60%),
-        radial-gradient(circle at bottom, rgba(168,85,247,0.18), transparent 60%);
+        radial-gradient(circle at top, rgba(120,120,255,0.25), transparent 60%),
+        radial-gradient(circle at bottom, rgba(168,85,247,0.25), transparent 60%);
       z-index: -1;
     }
 
     .container {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 100px 20px;
+      padding: 120px 20px;
       text-align: center;
     }
 
     h1 {
-      font-size: clamp(42px, 6vw, 80px);
+      font-size: clamp(48px, 6vw, 84px);
       font-weight: 800;
       letter-spacing: -2px;
+      text-shadow: 0 0 40px rgba(168,85,247,0.4);
     }
 
     .subtitle {
-      color: #9ca3af;
-      margin-top: 10px;
+      margin-top: 12px;
+      color: #a1a1aa;
       font-size: 20px;
+      letter-spacing: 2px;
     }
 
     .headline {
-      margin-top: 40px;
-      font-size: 28px;
+      margin-top: 50px;
+      font-size: 30px;
       font-weight: 600;
     }
 
     .headline span {
-      color: #9ca3af;
+      color: #a1a1aa;
     }
 
     .problems {
       margin-top: 40px;
-      color: #a1a1aa;
-      line-height: 1.8;
+      color: #9ca3af;
       font-size: 18px;
+      line-height: 1.9;
     }
 
     .problems strong {
       color: #fff;
     }
 
-    /* Bonuses */
     .bonuses {
-      margin-top: 80px;
+      margin-top: 90px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
     }
 
     .bonus {
-      background: #0a0a0a;
+      background: rgba(10,10,10,0.9);
       border: 1px solid #1f1f1f;
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 30px 20px;
       transition: 0.3s;
+      box-shadow: inset 0 0 30px rgba(255,255,255,0.02);
     }
 
     .bonus:hover {
-      border-color: #7c7cff;
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+      border-color: #a855f7;
+      box-shadow: 0 0 40px rgba(168,85,247,0.3);
     }
 
     .bonus h3 {
@@ -103,15 +110,14 @@
       font-size: 14px;
     }
 
-    /* Price */
     .price {
-      margin-top: 80px;
-      font-size: 28px;
+      margin-top: 90px;
+      font-size: 32px;
       font-weight: 700;
     }
 
     .price span {
-      color: #9ca3af;
+      color: #a1a1aa;
     }
 
     .price-desc {
@@ -119,38 +125,151 @@
       color: #71717a;
     }
 
-    /* Buy button */
     .buy-wrapper {
-      margin-top: 60px;
+      margin-top: 70px;
       position: relative;
       display: inline-block;
     }
 
     .buy-btn {
-      padding: 22px 60px;
-      font-size: 22px;
-      font-weight: 700;
+      padding: 24px 70px;
+      font-size: 24px;
+      font-weight: 800;
+      border-radius: 24px;
       border: none;
-      border-radius: 20px;
       cursor: pointer;
       color: #fff;
       background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
-      box-shadow: 0 0 50px rgba(168,85,247,0.6);
+      box-shadow: 0 0 70px rgba(168,85,247,0.7);
       transition: 0.3s;
     }
 
     .buy-btn:hover {
-      transform: scale(1.07);
+      transform: scale(1.08);
     }
 
     .pay-menu {
       position: absolute;
-      top: 120%;
+      top: 130%;
       left: 50%;
       transform: translateX(-50%);
-      width: 300px;
+      width: 320px;
       background: #050505;
       border: 1px solid #1f1f1f;
-      border-radius: 16px;
+      border-radius: 18px;
       overflow: hidden;
       display: none;
+    }
+
+    .pay-menu a {
+      display: block;
+      padding: 20px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .pay-menu a:hover {
+      background: #111;
+    }
+
+    .footer {
+      margin-top: 120px;
+      color: #a1a1aa;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+<div class="glow"></div>
+
+<div class="container">
+  <h1>STANDOFF 2</h1>
+  <div class="subtitle">PROFESSIONAL BOOST SERVICE</div>
+
+  <div class="headline">
+    Хочешь звание легенды? <span>Мы сделаем это.</span>
+  </div>
+
+  <div class="problems">
+    Застрял на одном ранге?<br>
+    Рандомы сливают игры?<br>
+    <strong>Пора это исправить.</strong>
+  </div>
+
+  <div class="bonuses">
+    <div class="bonus"><h3>STATS</h3><p>Высокий KD и винрейт</p></div>
+    <div class="bonus"><h3>REPORTS</h3><p>Скрины и видео отчёты</p></div>
+    <div class="bonus"><h3>SAFETY</h3><p>Без софта, 100% безопасно</p></div>
+    <div class="bonus"><h3>24/7</h3><p>Работаем без выходных</p></div>
+  </div>
+
+  <div class="price">
+    Цена: <span>Договорная</span>
+    <div class="price-desc">Подберём вариант под твой ранг</div>
+  </div>
+
+  <div class="buy-wrapper">
+    <button class="buy-btn" onclick="togglePay()">Купить буст</button>
+    <div class="pay-menu" id="payMenu">
+      <a href="https://www.donationalerts.com/r/fa1ston" target="_blank">💳 DonationAlerts</a>
+      <a href="https://t.me/Fa1stonCore" target="_blank">💬 Оплата через Telegram</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    Залетай в топ прямо сейчас
+  </div>
+</div>
+
+<script>
+  function togglePay() {
+    const menu = document.getElementById('payMenu');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  }
+
+  // PARTICLES
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let w, h;
+  const particles = [];
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  for (let i = 0; i < 80; i++) {
+    particles.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 2 + 1,
+      vx: Math.random() * 0.3,
+      vy: Math.random() * 0.3
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x > w) p.x = 0;
+      if (p.y > h) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+</script>
+
+</body>
+</html>
