@@ -1,69 +1,99 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star, Shield, Zap, Camera } from "lucide-react";
+import { Star, Shield, Zap, Camera, CreditCard } from "lucide-react";
+import { useState } from "react";
 
 export default function Home() {
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="relative min-h-screen bg-black text-white overflow-hidden">
-      {/* Background particles */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05),transparent_70%)]" />
+      {/* Animated background */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_60%)]" />
+        <motion.div
+          animate={{ opacity: [0.2, 0.4, 0.2] }}
+          transition={{ duration: 6, repeat: Infinity }}
+          className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(120,120,255,0.12),transparent_60%)]"
+        />
+      </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="max-w-5xl mx-auto px-6 py-24"
+        className="max-w-6xl mx-auto px-6 py-28"
       >
         {/* Hero */}
-        <h1 className="text-4xl md:text-6xl font-bold text-center tracking-tight">
-          STANDOFF 2 <span className="text-zinc-400">| PROFESSIONAL BOOST</span>
+        <h1 className="text-4xl md:text-7xl font-extrabold text-center tracking-tight">
+          STANDOFF 2
         </h1>
-        <p className="mt-6 text-xl text-center text-zinc-300">
-          Хочешь звание легенды? Мы поможем.
+        <p className="mt-4 text-center text-zinc-400 text-xl">
+          PROFESSIONAL BOOST SERVICE
+        </p>
+
+        <p className="mt-10 text-center text-2xl md:text-3xl font-semibold">
+          Хочешь звание легенды? <span className="text-zinc-400">Мы сделаем это.</span>
         </p>
 
         {/* Problems */}
-        <div className="mt-14 text-center space-y-3 text-zinc-400">
-          <p>Застрял на одном ранге?</p>
-          <p>Сливают рандомные тиммейты?</p>
-          <p className="text-white font-semibold">Пора это исправить.</p>
+        <div className="mt-14 text-center space-y-2 text-zinc-500 text-lg">
+          <p>Застрял на одном ранге</p>
+          <p>Рандомы сливают игры</p>
+          <p className="text-white font-semibold">Пора это исправить</p>
         </div>
 
         {/* Bonuses */}
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-4 gap-6">
-          <Bonus icon={<Zap />} title="STATS" desc="Высокий KD и сильная статистика" />
-          <Bonus icon={<Camera />} title="REPORTS" desc="Фото и видео отчёты" />
-          <Bonus icon={<Shield />} title="SAFETY" desc="100% безопасность, без софта" />
-          <Bonus icon={<Star />} title="NON-STOP" desc="Работаем 24/7" />
+        <div className="mt-24 grid grid-cols-1 md:grid-cols-4 gap-6">
+          <Bonus icon={<Zap />} title="STATS" desc="Высокий KD и уверенный винрейт" />
+          <Bonus icon={<Camera />} title="REPORTS" desc="Скриншоты и видео отчёты" />
+          <Bonus icon={<Shield />} title="SAFETY" desc="Без софта, 100% безопасно" />
+          <Bonus icon={<Star />} title="24/7" desc="Работаем без выходных" />
         </div>
 
         {/* Price */}
-        <div className="mt-16 text-center">
-          <p className="text-2xl font-semibold">Цена: <span className="text-zinc-400">Договорная</span></p>
-          <p className="text-zinc-500 mt-2">Найдём подход к каждому клиенту</p>
+        <div className="mt-20 text-center">
+          <p className="text-3xl font-bold">Цена: <span className="text-zinc-400">Договорная</span></p>
+          <p className="text-zinc-500 mt-3">Подберём лучший вариант под твой ранг</p>
         </div>
 
-        {/* Actions */}
-        <div className="mt-14 flex flex-col md:flex-row justify-center gap-4">
+        {/* Buy button */}
+        <div className="mt-16 flex justify-center relative">
           <Button
-            asChild
-            className="bg-white text-black hover:bg-zinc-200 px-8 py-6 text-lg"
+            onClick={() => setOpen(!open)}
+            className="relative px-12 py-8 text-xl font-bold rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:scale-105 transition shadow-[0_0_40px_rgba(168,85,247,0.6)]"
           >
-            <a href="https://t.me/yourtelegram" target="_blank">Заказать буст</a>
+            <CreditCard className="mr-3" /> Купить буст
           </Button>
-          <Button
-            asChild
-            variant="outline"
-            className="border-zinc-700 text-white hover:bg-zinc-900 px-8 py-6 text-lg"
-          >
-            <a href="https://t.me/yourtelegramreviews" target="_blank">Отзывы в Telegram</a>
-          </Button>
+
+          {open && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="absolute top-full mt-6 w-80 rounded-2xl bg-zinc-950 border border-zinc-800 shadow-xl"
+            >
+              <a
+                href="https://www.donationalerts.com/r/fa1ston"
+                target="_blank"
+                className="block px-6 py-5 hover:bg-zinc-900 transition rounded-t-2xl"
+              >
+                💳 DonationAlerts
+              </a>
+              <a
+                href="https://t.me/Fa1stonCore"
+                target="_blank"
+                className="block px-6 py-5 hover:bg-zinc-900 transition rounded-b-2xl"
+              >
+                💬 Оплата через Telegram
+              </a>
+            </motion.div>
+          )}
         </div>
 
         {/* Footer CTA */}
-        <p className="mt-20 text-center text-zinc-400 text-lg">
-          Залетай в топ прямо сейчас.
+        <p className="mt-24 text-center text-zinc-400 text-lg">
+          Залетай в топ прямо сейчас
         </p>
       </motion.div>
     </div>
@@ -72,7 +102,7 @@ export default function Home() {
 
 function Bonus({ icon, title, desc }) {
   return (
-    <Card className="bg-zinc-950 border-zinc-800">
+    <Card className="bg-zinc-950 border-zinc-800 hover:border-zinc-600 transition">
       <CardContent className="p-6 text-center">
         <div className="flex justify-center mb-4 text-zinc-300">{icon}</div>
         <h3 className="font-semibold text-lg">{title}</h3>
