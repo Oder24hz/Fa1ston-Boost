@@ -144,10 +144,11 @@
       border: none;
       cursor: pointer;
       color: #fff;
-      transition: transform 0.25s, box-shadow 0.25s;
       text-decoration: none;
       position: relative;
       overflow: hidden;
+      background: #111;
+      transition: transform 0.25s, box-shadow 0.25s;
     }
 
     .btn::before {
@@ -156,7 +157,13 @@
       inset: 0;
       background-size: 300% 300%;
       animation: gradientMove 6s ease infinite;
-      z-index: -1;
+      opacity: 0.9;
+      z-index: 0;
+    }
+
+    .btn span {
+      position: relative;
+      z-index: 1;
     }
 
     @keyframes gradientMove {
@@ -165,16 +172,21 @@
       100% { background-position: 0% 50%; }
     }
 
-    .btn:active {
-      transform: scale(0.95);
-    }
-
     .btn:hover {
       transform: scale(1.05);
     }
 
+    .btn:active {
+      transform: scale(0.95);
+    }
+
+    /* BUTTON VARIANTS */
+    .btn-main {
+      box-shadow: 0 0 70px rgba(168,85,247,0.75);
+    }
+
     .btn-main::before {
-      background-image: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+      background-image: linear-gradient(90deg, #6366f1, #a855f7, #ec4899, #a855f7);
     }
 
     .btn-opt::before {
@@ -253,7 +265,7 @@
   </div>
 
   <div class="buttons">
-    <button class="btn btn-main" onclick="togglePay()">Купить буст</button>
+    <button class="btn btn-main" onclick="togglePay()"><span>Купить буст</span></button>
 
     <div class="pay-menu" id="payMenu">
       <a href="https://www.donationalerts.com/r/fa1ston" target="_blank">💳 DonationAlerts</a>
@@ -261,11 +273,11 @@
     </div>
 
     <a class="btn btn-opt" href="https://oder24hz.vercel.app/" target="_blank">
-      Купить оптимизацию
+      <span>Купить оптимизацию</span>
     </a>
 
     <a class="btn btn-rev" href="https://t.me/+7o0lK8WxH91lOGMy" target="_blank">
-      Отзывы в Telegram
+      <span>Отзывы в Telegram</span>
     </a>
   </div>
 
