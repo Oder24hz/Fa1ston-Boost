@@ -126,6 +126,7 @@
       color: #71717a;
     }
 
+    /* BUTTONS */
     .buttons {
       margin-top: 70px;
       display: flex;
@@ -135,39 +136,57 @@
     }
 
     .btn {
-      padding: 22px 60px;
+      width: 320px;
+      padding: 22px 0;
       font-size: 20px;
       font-weight: 800;
       border-radius: 22px;
       border: none;
       cursor: pointer;
       color: #fff;
-      transition: 0.25s;
+      transition: transform 0.25s, box-shadow 0.25s;
       text-decoration: none;
-      display: inline-block;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-size: 300% 300%;
+      animation: gradientMove 6s ease infinite;
+      z-index: -1;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .btn:active {
       transform: scale(0.95);
     }
 
-    .btn-main {
-      background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
-      box-shadow: 0 0 70px rgba(168,85,247,0.7);
+    .btn:hover {
+      transform: scale(1.05);
     }
 
-    .btn-secondary {
-      background: #0a0a0a;
-      border: 1px solid #262626;
+    .btn-main::before {
+      background-image: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
     }
 
-    .btn-secondary:hover {
-      border-color: #a855f7;
-      box-shadow: 0 0 30px rgba(168,85,247,0.25);
+    .btn-opt::before {
+      background-image: linear-gradient(90deg, #3b82f6, #6366f1, #8b5cf6);
+    }
+
+    .btn-rev::before {
+      background-image: linear-gradient(90deg, #22c55e, #06b6d4, #3b82f6);
     }
 
     .pay-menu {
-      width: 300px;
+      width: 320px;
       background: #050505;
       border: 1px solid #1f1f1f;
       border-radius: 18px;
@@ -195,13 +214,9 @@
     }
 
     @media (max-width: 600px) {
-      .container {
-        padding: 90px 16px;
-      }
-
-      .btn {
+      .btn,
+      .pay-menu {
         width: 100%;
-        padding: 20px;
       }
     }
   </style>
@@ -245,11 +260,11 @@
       <a href="https://t.me/Fa1stonCore" target="_blank">💬 Оплата через Telegram</a>
     </div>
 
-    <a class="btn btn-secondary" href="https://oder24hz.vercel.app/" target="_blank">
+    <a class="btn btn-opt" href="https://oder24hz.vercel.app/" target="_blank">
       Купить оптимизацию
     </a>
 
-    <a class="btn btn-secondary" href="https://t.me/+7o0lK8WxH91lOGMy" target="_blank">
+    <a class="btn btn-rev" href="https://t.me/+7o0lK8WxH91lOGMy" target="_blank">
       Отзывы в Telegram
     </a>
   </div>
